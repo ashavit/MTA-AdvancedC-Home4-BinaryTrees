@@ -4,8 +4,8 @@ Q1: Q1.o Q1Tree.o
 	gcc Q1.o Q1Tree.o -o Q1
 	./Q1
 
-Q2: Q2.o
-	gcc Q2.o -o Q2
+Q2: Q2.o Q2Tree.o
+	gcc Q2.o Q2Tree.o -o Q2
 	./Q2
 
 Q3: Q3.o
@@ -26,17 +26,20 @@ Q1.o: Q1.c Q1Tree.h
 Q1Tree.o: Q1Tree.c Q1Tree.h
 	gcc -c Q1Tree.c
 
-Q2.o: Q2.c
-	gcc Q2.c -c Q2.o
+Q2.o: Q2.c  Q2Tree.h
+	gcc -c Q2.c
+
+Q2Tree.o: Q2Tree.c Q2Tree.h
+		gcc -c Q2Tree.c
 
 Q3.o: Q3.c
-	gcc Q3.c -c Q3.o
+	gcc -c Q3.c
 
 Q4.o: Q4.c
-	gcc Q4.c -c Q4.o
+	gcc -c Q4.c
 
 Q5.o: Q5.c
-	gcc Q5.c -c Q4.o
+	gcc -c Q5.c
 
 clear:
 	rm *.o

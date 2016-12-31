@@ -1,7 +1,8 @@
+/* This program accepts a calculation sting for the user, build a calulcation tree and calculates the result */
 
-typedef int BOOL;
-#define FALSE 0
-#define TRUE 1
+
+#include <stdio.h>
+#include "Q2Tree.h"
 
 #define SIZE 100
 
@@ -11,6 +12,7 @@ int main()
     Tree tr;
     double res;
     BOOL expressionOK;
+    
     printf("Please enter the expression: ");
     fgets(str,SIZE,stdin);
 
@@ -19,7 +21,7 @@ int main()
     if(expressionOK == TRUE)
     {
         res = calcExpression(tr);
-        printf("%s = %.2f", str, res);
+        printf("%s = %.2f\n", str, res);
     }
     else
     {
