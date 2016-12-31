@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include "Q1Tree.h"
 
 #define SIZE 100
 
