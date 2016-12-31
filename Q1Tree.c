@@ -8,33 +8,12 @@
 #pragma mark - Private Declarations
 
 static TreeNode* allocateTreeNode(int data);
+static void freeTreeRec(TreeNode *root);
 static void printTreeInorderRec(TreeNode *node);
 
+static TreeNode* buildTreeRootFromArrayRec(int *arr, int size);
+
 #pragma mark - Public Implementations
-
-TreeNode* buildTreeRootFromArrayRec(int *arr, int size)
-{
-    TreeNode *result = NULL;
-    if (size == 1)
-    {
-        if (arr[0] != NO_NODE_VAL)
-            result = allocateTreeNode(arr[0]);
-    }
-    else
-    {
-        int mid = (size-1) / 2;
-
-        // Make sure node is not -1
-        if (arr[mid] != NO_NODE_VAL)
-        {
-            result = allocateTreeNode(arr[mid]);
-            result->left = buildTreeRootFromArrayRec(arr, mid);
-            result->right = buildTreeRootFromArrayRec(arr+mid+1, mid);            
-        }
-    }
-
-    return result;
-}
 
 Tree BuildTreeFromArray(int *arr, int  size)
 {
@@ -54,7 +33,11 @@ void printTreeInorder(Tree tree)
 
 void freeTree(Tree tree)
 {
-
+    if (tree.root)
+    {
+        freeTreeRec(tree.root);
+        tree.root = NULL;
+    }
 }
 
 #pragma mark - Private Implementations
@@ -73,7 +56,22 @@ static TreeNode* allocateTreeNode(int data)
     return result;
 }
 
-void printTreeInorderRec(TreeNode *root)
+static void freeTreeRec(TreeNode *root)
+{
+    if (root->left)
+    {
+        freeTreeRec(root->left);
+    }
+    
+    if (root->right)
+    {
+        freeTreeRec(root->right);
+    }
+    
+    free(root);
+}
+
+static void printTreeInorderRec(TreeNode *root)
 {
     if (root->left)
     {
@@ -87,3 +85,28 @@ void printTreeInorderRec(TreeNode *root)
         printTreeInorderRec(root->right);
     }
 }
+
+static TreeNode* buildTreeRootFromArrayRec(int *arr, int size)
+{
+    TreeNode *result = NULL;
+    if (size == 1)
+    {
+        if (arr[0] != NO_NODE_VAL)
+            result = allocateTreeNode(arr[0]);
+    }
+    else
+    {
+        int mid = (size-1) / 2;
+        
+        // Make sure node is not -1
+        if (arr[mid] != NO_NODE_VAL)
+        {
+            result = allocateTreeNode(arr[mid]);
+            result->left = buildTreeRootFromArrayRec(arr, mid);
+            result->right = buildTreeRootFromArrayRec(arr+mid+1, mid);
+        }
+    }
+    
+    return result;
+}
+
