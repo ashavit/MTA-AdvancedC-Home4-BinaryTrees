@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include "Q3Tree.h"
+
 #define SIZE 100
 
 int main()
@@ -5,7 +8,7 @@ int main()
     int size, i;
     int arr[SIZE];
     Tree tr;
-    TreeNode * p;
+    TreeNode *p;
     int parentData, data, branchSelect;
 
     printf("Please enter the number of items: ");
