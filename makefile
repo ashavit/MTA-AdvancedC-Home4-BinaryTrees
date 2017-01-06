@@ -9,7 +9,7 @@ Q2: Q2.o Q2Tree.o
 	./Q2
 
 Q3: Q3.o Q3Tree.o
-	gcc Q3.o -o Q3
+	gcc Q3.o Q3Tree.o -o Q3
 	./Q3
 
 Q4: Q4.o Q1Tree.o Q4List.o
@@ -31,7 +31,7 @@ Q2Tree.o: Q2Tree.c Q2Tree.h
 	gcc -c Q2Tree.c
 
 
-Q3.o: Q3.c
+Q3.o: Q3.c Q3Tree.h
 	gcc -c Q3.c
 
 Q3Tree.o: Q3Tree.c Q3Tree.h
