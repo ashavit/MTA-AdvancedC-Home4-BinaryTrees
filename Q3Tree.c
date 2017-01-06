@@ -18,7 +18,7 @@ static TreeNode* findParentRec(TreeNode *root, int parentData, int branchSelect)
 static ListNode* allocateListCell(int data);
 static void addToEmptyList(List *list, ListNode *cell);
 static void addToEndOfList(List *list, ListNode *cell);
-static void addLeafNodeToList(List *list, int data);
+static void appendLeafNodeToList(List *list, int data);
 
 #pragma mark - Public Implementations
 
@@ -156,9 +156,9 @@ static TreeNode* buildTreeRootFromArrayRec(int *arr, int size, TreeNode *parent,
         }
     }
     
-    // Ir result is a leaf - save it
+    // If result is a leaf - save it
     if (result && !result->left && !result->right)
-        addLeafNodeToList(leafList, result->data);
+        appendLeafNodeToList(leafList, result->data);
     
     return result;
 }
@@ -214,7 +214,7 @@ static void addToEndOfList(List *list, ListNode *cell)
     list->tail = cell;
 }
 
-static void addLeafNodeToList(List *list, int data)
+static void appendLeafNodeToList(List *list, int data)
 {
     ListNode *newCell = allocateListCell(data);
     
